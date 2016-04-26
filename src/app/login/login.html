@@ -1,0 +1,42 @@
+<div id="login" class="container m-t-3">
+  
+  <div *ngIf="error_logging_in" class="alert alert-danger m-t-1" role="alert">
+    <p>We encountered a problem. Please try again later.</p>
+  </div>
+  
+  <div class="row">
+    <div class="col-xs-6">
+        <button class="btn btn-block btn-primary" (click)="facebookLogin()">
+            <i *ngIf="!fb_pending" class="fa fa-lg fa-inverse fa-facebook"></i>
+            <i *ngIf="fb_pending" class="fa fa-lg fa-spinner fa-inverse fa-spin"></i>
+        </button>
+    </div>
+    <div class="col-xs-6">
+        <button class="btn btn-block btn-danger" (click)="googleLogin()">
+            <i *ngIf="!goog_pending" class="fa fa-lg fa-inverse fa-google"></i>
+            <i *ngIf="goog_pending" class="fa fa-lg fa-spinner fa-inverse fa-spin"></i>
+        </button>
+    </div>
+  </div>
+  
+  <hr class="or m-y-2">
+  
+  <form (ngSubmit)="passwordLogin(email.value, password.value)">
+    <fieldset class="form-group">
+      <label for="email">Email</label>
+      <input id="email" type="email" name="email" class="form-control" #email>
+    </fieldset>
+    <fieldset class="form-group" [ngClass]="{'has-danger': incorrect_password}">
+      <label for="password">Password</label>
+      <input id="password" type="password" name="password" class="form-control" (keyup)="resetErrors()" #password>
+      <div *ngIf="incorrect_password" class="alert alert-danger m-t-1" role="alert">
+        <p>You entered an incorrect password. Please try again.</p>
+      </div>
+    </fieldset>
+    <button class="btn btn-success btn-block" type="submit" name="login">
+      <span *ngIf="!password_pending">Login / Create Account</span>
+      <i *ngIf="password_pending" class="fa fa-lg fa-spinner fa-inverse fa-spin"></i>
+    </button>
+  </form>
+
+</div>

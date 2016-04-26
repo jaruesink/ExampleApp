@@ -1,0 +1,20 @@
+<div id="home" *ngIf="data.auth_data" class="container p-t-3">
+  <!-- Logged in as {{data.user.email}} -->
+  <h1>ChatApp</h1>
+  <button id="logout_button" class="btn btn-danger" type="button" name="logout" (click)="logout()">Logout</button>
+  <ul id="messages">
+    <li *ngFor="#message of messages | async">
+      {{message.content}} - {{message.author}}
+    </li>
+  </ul>
+  <form id="add_message" *ngIf="form_active" (ngSubmit)="send(content.value)">
+    <fieldset class="form-group">
+      <div class="input-group">
+        <input placeholder="Enter your message..." type="text" name="content" class="form-control" #content autocomplete="off">
+        <span class="input-group-btn">
+          <button class="btn btn-success" type="submit" name="send">Send</button>
+        </span>
+      </div>
+    </fieldset>
+  </form>
+</div>
